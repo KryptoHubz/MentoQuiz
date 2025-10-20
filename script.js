@@ -1,72 +1,37 @@
 const quizData = [
     {
         question: "Why is Mento considered “special” compared to most crypto projects?",
-        options: [
-            "NFTs for every fiat currency",
-            "Multichain on-chain FX liquidity & interoperability",
-            "Only issues USD-backed stablecoins",
-            "Focuses on high-frequency trading"
-        ],
+        options: ["NFTs for every fiat currency","Multichain on-chain FX liquidity & interoperability","Only issues USD-backed stablecoins","Focuses on high-frequency trading"],
         answer: "Multichain on-chain FX liquidity & interoperability"
     },
     {
         question: "What’s a key goal of Mento’s stablecoin system?",
-        options: [
-            "Replace all national currencies",
-            "Seamless cross-border payments & local currency adoption",
-            "Only benefit big institutions",
-            "Mint NFTs for each currency"
-        ],
+        options: ["Replace all national currencies","Seamless cross-border payments & local currency adoption","Only benefit big institutions","Mint NFTs for each currency"],
         answer: "Seamless cross-border payments & local currency adoption"
     },
     {
         question: "Which tech partner is critical for Mento’s interoperability?",
-        options: [
-            "Ethereum only",
-            "Wormhole protocol",
-            "Centralized bank consortium",
-            "NFT marketplaces"
-        ],
+        options: ["Ethereum only","Wormhole protocol","Centralized bank consortium","NFT marketplaces"],
         answer: "Wormhole protocol"
     },
     {
         question: "Long-term vision of Mento?",
-        options: [
-            "Dominate stablecoin trading",
-            "Enable currencies to “go on-chain” & interoperate",
-            "Issue NFTs for all digital transactions",
-            "Replace Bitcoin"
-        ],
+        options: ["Dominate stablecoin trading","Enable currencies to “go on-chain” & interoperate","Issue NFTs for all digital transactions","Replace Bitcoin"],
         answer: "Enable currencies to “go on-chain” & interoperate"
     },
     {
         question: "What challenge does on-chain FX aim to solve?",
-        options: [
-            "More complex NFT systems",
-            "Reduce friction in cross-border payments & currency exchange",
-            "Make each blockchain a separate payment network",
-            "Centralize stablecoin control"
-        ],
+        options: ["More complex NFT systems","Reduce friction in cross-border payments & currency exchange","Make each blockchain a separate payment network","Centralize stablecoin control"],
         answer: "Reduce friction in cross-border payments & currency exchange"
     },
     {
         question: "Which is NOT a focus of Mento?",
-        options: [
-            "Multichain FX liquidity",
-            "Cross-border payments",
-            "Issuing only a single fiat-backed stablecoin",
-            "On-chain local currencies"
-        ],
+        options: ["Multichain FX liquidity","Cross-border payments","Issuing only a single fiat-backed stablecoin","On-chain local currencies"],
         answer: "Issuing only a single fiat-backed stablecoin"
     },
     {
         question: "What could Mento enable in the future if successful?",
-        options: [
-            "Seamless multi-currency, cross-chain transactions",
-            "Monopoly on global currency",
-            "Exclusive NFTs for banks",
-            "Replace all blockchains with one"
-        ],
+        options: ["Seamless multi-currency, cross-chain transactions","Monopoly on global currency","Exclusive NFTs for banks","Replace all blockchains with one"],
         answer: "Seamless multi-currency, cross-chain transactions"
     }
 ];
@@ -78,6 +43,7 @@ const resultContainer = document.getElementById("result-container");
 const scoreEl = document.getElementById("score");
 const restartBtn = document.getElementById("restart-btn");
 const progressEl = document.getElementById("progress");
+const shareBtn = document.getElementById("share-btn");
 
 let currentQuestion = 0;
 let score = 0;
@@ -111,7 +77,6 @@ function selectOption(button, selected) {
         score++;
     } else {
         button.classList.add("wrong");
-        // Highlight the correct answer
         Array.from(optionsContainer.children).forEach(btn => {
             if (btn.innerText === correct) btn.classList.add("correct");
         });
@@ -138,6 +103,17 @@ function showResult() {
     resultContainer.classList.remove("hidden");
     scoreEl.innerText = `${score} / ${quizData.length}`;
     progressEl.style.width = `100%`;
+
+    // Confetti for perfect score
+    if (score === quizData.length) {
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    }
+
+    // Twitter/X share
+    shareBtn.classList.remove("hidden");
+    const text = encodeURIComponent(`I scored ${score}/${quizData.length} on the Mento Protocol Quiz! Can you beat me? 🚀`);
+    const url = encodeURIComponent(window.location.href);
+    shareBtn.href = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
 }
 
 restartBtn.addEventListener("click", () => {
@@ -148,5 +124,4 @@ restartBtn.addEventListener("click", () => {
     loadQuestion();
 });
 
-// Load first question on page load
 loadQuestion();
