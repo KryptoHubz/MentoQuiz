@@ -1,0 +1,86 @@
+/* Global Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 650px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    position: relative;
+}
+
+h1 {
+    margin-bottom: 25px;
+}
+
+#progress-bar {
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    height: 15px;
+}
+
+#progress {
+    height: 100%;
+    width: 0%;
+    background-color: #ff7f50;
+    transition: width 0.4s ease-in-out;
+}
+
+button {
+    background-color: #ff7f50;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #ff6347;
+    transform: scale(1.05);
+}
+
+.option-btn {
+    display: block;
+    width: 100%;
+    background: rgba(255,255,255,0.1);
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.option-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.02);
+}
+
+.option-btn.correct {
+    background-color: #28a745 !important;
+}
+
+.option-btn.wrong {
+    background-color: #dc3545 !important;
+}
+
+.hidden {
+    display: none;
+}
